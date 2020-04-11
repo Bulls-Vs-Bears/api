@@ -1,4 +1,19 @@
-import User, {printName as printUserName, printAge as printUserAge} from './user.js';
+const fastify = require('fastify')({ logger: true });
+import { config }from 'dotenv';
+config();
 
-const user = new User('Philip', 26);
-console.log(user);
+fastify.get('/', async (request, reply) => {
+  return { hello: 'world'};
+})
+
+const start = async () => {
+  try {
+    const port = process.env.PORT;
+    await fastify.listen(port);
+    fastify.log.info(`server listening on ${port}`);
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+}
+start();
