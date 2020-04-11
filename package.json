@@ -18,5 +18,10 @@
   "homepage": "https://github.com/Bulls-Vs-Bears/api#readme",
   "dependencies": {
     "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.5"
   }
 }
