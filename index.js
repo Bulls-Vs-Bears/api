@@ -1,9 +1,11 @@
 const fastify = require('fastify')({ logger: true });
 import { config }from 'dotenv';
+
 config();
 
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world'};
+fastify.get('/', async () => {
+  const result = { hello: 'world'};
+  return result;
 })
 
 const start = async () => {
@@ -16,4 +18,5 @@ const start = async () => {
     process.exit(1);
   }
 }
+
 start();
