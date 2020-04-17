@@ -1,21 +1,29 @@
-const fastify = require('fastify')({ logger: true });
+import fastify from 'fastify';
 import { config }from 'dotenv';
 
+const server = fastify({ logger: true });
 config();
 
-fastify.get('/', async () => {
+server.get('/', async () => {
   const result = { hello: 'world'};
   return result;
 })
 
 const start = async () => {
+  const port = process.env.PORT;
+
   try {
-    const port = process.env.PORT;
-    await fastify.listen(port);
-    fastify.log.info(`server listening on ${port}`);
+    await server.listen(port);
+    server.log.info(`server listening on ${port}`);
   } catch (err) {
-    fastify.log.error(err);
-    process.exit(1);
+    server.log.error(err);
+    // Reboot Server Connection
+    server.close(
+      setTimeout(
+        server.listen(port, () => server.log.info('Successfully rebooted server')),
+        1000
+      )
+    );
   }
 }
 
