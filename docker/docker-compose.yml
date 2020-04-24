@@ -1,0 +1,19 @@
+version: "3"
+services:
+  bvb-database:
+    image: postgres
+    container_name: bvb_db
+    env_file:
+      - ./.env
+    volumes:
+      - ../db/:/docker-entrypoint-initdb.d/
+
+  bvb-app:
+    image: node:latest
+    container_name: bvb_app
+    volumes:
+      - ../:/var/www/app/api
+    ports: 
+      - ${NODE_PORT}:${NODE_PORT}
+    working_dir: '/var/www/app/api'
+    command: npm start
