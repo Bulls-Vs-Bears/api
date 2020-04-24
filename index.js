@@ -2,9 +2,10 @@ import 'dotenv/config';
 import server from './src';
 
 const port = process.env.PORT;
+const host = process.env.HOST;
 
 try {
-  server.listen(port, (err) => {
+  server.listen(port, host, (err) => {
     // TODO: Throw a better error
     if (err) throw new Error;
     server.log.info(`server listening on ${port}`);
