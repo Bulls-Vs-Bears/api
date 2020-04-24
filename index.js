@@ -1,13 +1,5 @@
-import fastify from 'fastify';
-import { config } from 'dotenv';
-
-const server = fastify({ logger: true });
-config();
-
-server.get('/', async () => {
-  const result = { hello: 'world'};
-  return result;
-})
+import 'dotenv/config';
+import server from './src';
 
 const port = process.env.PORT;
 
