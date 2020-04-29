@@ -21,8 +21,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "fastify": "^2.13.0",
-    "pino-multi-stream": "^5.0.0",
-    "pino-pretty": "^4.0.0"
+    "fastify-helmet": "^3.0.2",
+    "pino-multi-stream": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
