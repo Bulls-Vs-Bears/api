@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import server from './src';
 
-
 const port = process.env.PORT;
 
 try {
