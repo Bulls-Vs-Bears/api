@@ -2,7 +2,7 @@ import fastify from 'fastify';
 import helmet from 'fastify-helmet';
 import rateLimit from 'fastify-rate-limit';
 import {logger} from '../logs';
-import {setRateLimit} from './rate-limit';
+import {setRateLimit} from './config/rate-limit';
 
 const server = fastify({ logger: logger });
 server.register(helmet);
