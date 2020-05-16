@@ -20,3 +20,10 @@ This is the nodejs api for Bulls vs. Bears, a commission free stock trading api 
 1. `cd docker && docker-compose up -d`
 2. `docker exec -it bvb_db bash`
 3. `psql -d BvsB -U [user]`
+
+## Git Submodule commands [(info)](https://www.vogella.com/tutorials/GitSubmodules/article.html)
+
+Make sure when you first clone or want the latest off master/stage/dev you run
+following.
+
+1. `git submodule update --init --recursive`
