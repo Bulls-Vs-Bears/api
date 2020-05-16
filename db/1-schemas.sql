@@ -1,2 +1,0 @@
-DROP SCHEMA IF EXISTS bvb_accounts CASCADE;
-CREATE SCHEMA bvb_accounts;

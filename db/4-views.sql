@@ -1,1 +1,0 @@
--- Views for postgresql: https://www.postgresqltutorial.com/managing-postgresql-views/
