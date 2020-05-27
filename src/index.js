@@ -5,6 +5,7 @@ import {logger} from '../logs';
 import {setRateLimit} from './config/rate-limit';
 import { routes } from './routes';
 
+
 const server = fastify({ logger: logger });
 server.register(helmet);
 server.register(
@@ -13,6 +14,8 @@ server.register(
 );
 
 server.register(routes);
+
+
 
 server.get('/', async () => {
   const result = { hello: 'world'};
