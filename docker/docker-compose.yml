@@ -2,15 +2,24 @@ version: "3"
 services:
   bvb-database:
     image: postgres
-    container_name: bvb_db
+    hostname: ${POSTGRES_HOST_NAME}
     env_file:
       - ./.env
+    container_name: bvb_db
     volumes:
       - ../db/:/docker-entrypoint-initdb.d/
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
 
   bvb-app:
     image: node:latest
     container_name: bvb_app
+    depends_on: 
+      - bvb-database
+    links:
+      - bvb-database
+    environment: 
+      WAIT_HOSTS: postgres:5432
     volumes:
       - ../:/var/www/app/api
     ports: 
