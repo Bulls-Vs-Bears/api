@@ -1,12 +1,15 @@
-import {writerConnection} from '../../config/database/database-connections.js';
-
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
-  server.post('/user', await postUserHandler);
+  server.post('/user', await createUserHandler);
 
-  async function postUserHandler() {
+  async function createUserHandler(req) {
     console.log("we are hereeeee");
-    writerConnection(server);
+    console.log(req.body); 
+    const client = await server.pg.pgWriter.connect();
+    await client.query(
+      'INSERT INTO user (user_name, user_password, user_email) \
+      VALUES ()'
+    );
   }
 }
 
