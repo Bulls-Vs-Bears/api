@@ -1,14 +1,12 @@
 import 'dotenv/config';
 import server from './src';
-
-const port = process.env.PORT;
-const host = process.env.HOST;
+import { PORT, HOST } from 'config';
 
 try {
-  server.listen(port, host, (err) => {
+  server.listen(PORT, HOST, (err) => {
     // TODO: Throw a better error
     if (err) throw new Error;
-    server.log.info(`server listening on ${port}`);
+    server.log.info(`server listening on ${PORT}`);
   });
 } catch (err) {
   server.log.error(err);
@@ -16,7 +14,7 @@ try {
   // Reboot Server Connection
   server.close(
     setTimeout(
-      server.listen(port, () => server.log.info('Successfully rebooted server')),
+      server.listen(PORT, () => server.log.info('Successfully rebooted server')),
       1000
     )
   );

@@ -1,4 +1,4 @@
-const { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } = process.env; 
+import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
