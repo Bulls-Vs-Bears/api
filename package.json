@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Bulls-Vs-Bears/api#readme",
   "dependencies": {
+    "babel-plugin-module-resolver": "^4.0.0",
     "dotenv": "^8.2.0",
     "fastify": "^2.13.0",
     "fastify-helmet": "^3.0.2",
