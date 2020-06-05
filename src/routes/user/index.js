@@ -1,4 +1,4 @@
-const { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } = process.env; 
+import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -17,13 +17,13 @@ export async function userRoutes(server) {
   async function createUserHandler(req, res) {
     //! NOTE: This is not done yet.
     try {
-      // const client = await server.pg.pgWriter.connect();
-      // const { username, password, email } = req.body;
+      const client = await server.pg.pgWriter.connect();
+      const { username, password, email } = req.body;
       
-      // await client.query(
-      //   'INSERT INTO user (user_name, user_password, user_email) \
-      //   VALUES ()', [username, password, email]
-      // );
+      await client.query(
+        'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
+        [username, password, email]
+      );
       res.code(HTTP_CREATED).send({ req });
     } catch (err) {
       server.log.error(err);
