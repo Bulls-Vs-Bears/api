@@ -1,6 +1,5 @@
 import { userRoutes } from './user';
-
-const { HTTP_SUCCESS, } = process.env; 
+import { HTTP_SUCCESS, } from 'config'; 
 
 export async function routes(server) {
   server.register(userRoutes, { prefix: '/api/v1' });
