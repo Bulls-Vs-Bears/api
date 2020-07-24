@@ -15,7 +15,6 @@ export async function userRoutes(server) {
   }
 
   async function createUserHandler(req, res) {
-    //! NOTE: This is not done yet.
     try {
       const client = await server.pg.pgWriter.connect();
       const { username, password, email } = req.body;
@@ -24,7 +23,16 @@ export async function userRoutes(server) {
         'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
         [username, password, email]
       );
-      res.code(HTTP_CREATED).send({ req });
+       //! NOTE: This is not done yet, we want to 
+       //! fix the response objects to have some sort of standard.
+      const response = {
+        success: true, 
+        message: "User registered successfully", 
+        data: {}, 
+        token: {},
+      };
+
+      res.code(HTTP_CREATED).send(response);
     } catch (err) {
       server.log.error(err);
       res.code(HTTP_ERROR).send(err);
