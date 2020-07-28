@@ -12,5 +12,7 @@ export const {
   HTTP_UNAUTHORIZED,
   HTTP_FORBIDDEN,
   HTTP_ERROR,
-  SALT_ROUNDS,
+  JWT_SECRET,
+  GENERAL_ACCESS,
+  PAID_ACCESS,
 } = process.env;

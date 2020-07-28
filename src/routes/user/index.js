@@ -1,5 +1,5 @@
-import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
-import { createHashedPassword, } from '../../utils/hash-password';
+import { GENERAL_ACCESS, HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config';
+import { createHashedPassword, } from '../../utils/hash-password'; 
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -33,11 +33,19 @@ export async function userRoutes(server) {
       const response = {
         success: true, 
         message: "User registered successfully", 
-        data: {}, 
-        token: {},
+        data: {},
       };
 
-      res.code(HTTP_CREATED).send(response);
+      const token = await res.jwtSign({
+        access: [GENERAL_ACCESS]
+      })
+
+      const cookieOptions = {
+        path: '/',
+        httpOnly: true,
+      };
+
+      res.setCookie('token', token, cookieOptions).code(HTTP_CREATED).send(response);
     } catch (err) {
       server.log.error(err);
       res.code(HTTP_ERROR).send(err);
