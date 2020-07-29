@@ -1,4 +1,5 @@
 import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
+import { responseMessage } from '../../util/response';
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -25,13 +26,14 @@ export async function userRoutes(server) {
       );
        //! NOTE: This is not done yet, we want to 
        //! fix the response objects to have some sort of standard.
-      const response = {
-        success: true, 
-        message: "User registered successfully", 
-        data: {}, 
-        token: {},
-      };
+      // const response = {
+      //   success: true, 
+      //   message: "User registered successfully", 
+      //   data: {}, 
+      //   token: {},
+      // };
 
+      const response = responseMessage("post", true);
       res.code(HTTP_CREATED).send(response);
     } catch (err) {
       server.log.error(err);
