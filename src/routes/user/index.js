@@ -2,7 +2,7 @@ import { GENERAL_ACCESS, HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'
 import { createHashedPassword, } from '../../utils/hash-password'; 
 
 export async function userRoutes(server) {
-  server.get('/user', getUserHandler);
+  server.get('/user', { preValidation: [server.authenticate] }, getUserHandler);
   server.post('/user', await createUserHandler);
 
   async function getUserHandler(req, res) {
@@ -18,34 +18,34 @@ export async function userRoutes(server) {
   async function createUserHandler(req, res) {
     try {
       const client = await server.pg.pgWriter.connect();
-      const { username, password, email } = req.body;
+      const { username, password, email, access } = req.body;
       
       // hash password using bcrypt
       const hashedPassword = await createHashedPassword(password);
 
       await client.query(
-        'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
-        [username, hashedPassword, email]
+        `INSERT INTO bvb_accounts.user 
+          (user_name, user_password, user_email, user_access) 
+        VALUES 
+          ($1, $2, $3, $4)`,
+        [username, hashedPassword, email, access]
       );
       
        //! NOTE: This is not done yet, we want to 
        //! fix the response objects to have some sort of standard.
+      
+      const token = await res.jwtSign({
+        access: [GENERAL_ACCESS]
+      });
+
       const response = {
         success: true, 
         message: "User registered successfully", 
         data: {},
+        token
       };
 
-      const token = await res.jwtSign({
-        access: [GENERAL_ACCESS]
-      })
-
-      const cookieOptions = {
-        path: '/',
-        httpOnly: true,
-      };
-
-      res.setCookie('token', token, cookieOptions).code(HTTP_CREATED).send(response);
+      res.code(HTTP_CREATED).send(response);
     } catch (err) {
       server.log.error(err);
       res.code(HTTP_ERROR).send(err);

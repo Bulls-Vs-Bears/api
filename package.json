@@ -28,6 +28,7 @@
     "fastify-cookie": "^4.0.2",
     "fastify-helmet": "^3.0.2",
     "fastify-jwt": "^2.1.2",
+    "fastify-plugin": "^2.0.3",
     "fastify-postgres": "^2.0.0",
     "fastify-rate-limit": "^3.0.1",
     "middie": "^5.1.0",

@@ -15,4 +15,7 @@ export const {
   JWT_SECRET,
   GENERAL_ACCESS,
   PAID_ACCESS,
+  JWT_ALGORITHM,
+  JWT_PRIVATE_KEY,
+  JWT_PUBLIC_KEY
 } = process.env;
