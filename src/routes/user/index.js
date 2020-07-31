@@ -1,4 +1,5 @@
 import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
+import { hashPassword } from '../../config/database/postgres/hash-password';
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -19,9 +20,12 @@ export async function userRoutes(server) {
       const client = await server.pg.pgWriter.connect();
       const { username, password, email } = req.body;
       
+      // hashing password using bcrypt
+      const hashedPassword = await hashPassword(password);
+
       await client.query(
         'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
-        [username, password, email]
+        [username, hashedPassword, email]
       );
        //! NOTE: This is not done yet, we want to 
        //! fix the response objects to have some sort of standard.
