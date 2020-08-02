@@ -32,8 +32,8 @@ export async function userRoutes(server) {
       //   data: {}, 
       //   token: {},
       // };
-
-      const response = responseMessage("post", true);
+      const token = null;
+      const response = responseMessage("post", true, req.body, token);
       res.code(HTTP_CREATED).send(response);
     } catch (err) {
       server.log.error(err);
