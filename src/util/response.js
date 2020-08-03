@@ -1,4 +1,4 @@
-export function responseMessage(type, success, data, token){
+export function createResponseMessage(type, success, data, token){
     let message = "Invalid Data";
     if (success == true){
         switch(type){
@@ -16,11 +16,6 @@ export function responseMessage(type, success, data, token){
                 break;
         }
     }
-    const response = {
-        success: success, 
-        message: message, 
-        data: data,
-        token: token 
-    }
+    const response = { success, message, data, token };
     return response;
 }
