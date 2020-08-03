@@ -1,7 +1,10 @@
 export function responseMessage(type, success, data, token){
-    let message = "Data registered successfully";
+    let message = "Invalid Data";
     if (success == true){
         switch(type){
+            case 'post':
+                message = "Data created successfully";
+                break;
             case 'get':
                 message = 'Data found';
                 break;
@@ -12,8 +15,6 @@ export function responseMessage(type, success, data, token){
                 message = 'Data deleted successfully';
                 break;
         }
-    } else {
-        message = "Invalid Data";
     }
     const response = {
         success: success, 
