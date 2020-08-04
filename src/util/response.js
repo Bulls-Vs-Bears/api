@@ -1,10 +1,10 @@
-export function successfulResponse(type, data, token){
+export function createSuccessfulResponse(type, data, token){
     let message;
     const success = true;
 
     switch(type){
         case 'post':
-            message = "Data created successfully";
+            message = 'Data created successfully';
             break;
         case 'get':
             message = 'Data found successfully';

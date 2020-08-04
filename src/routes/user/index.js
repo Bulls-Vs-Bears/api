@@ -1,5 +1,5 @@
 import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
-import { successfulResponse } from '../../util/response';
+import { createSuccessfulResponse } from '../../util/response';
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -25,7 +25,7 @@ export async function userRoutes(server) {
         [username, password, email]
       );
       const token = null;
-      const response = successfulResponse("post", req.body, token);
+      const response = createSuccessfulResponse("post", req.body, token);
       res.code(HTTP_CREATED).send(response);
     } catch (err) {
       server.log.error(err);
