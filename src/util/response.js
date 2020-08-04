@@ -6,7 +6,7 @@ export function createResponseMessage(type, success, data, token){
                 message = "Data created successfully";
                 break;
             case 'get':
-                message = 'Data found';
+                message = 'Data found successfully';
                 break;
             case 'put':
                 message = 'Data updated successfully';
