@@ -23,7 +23,6 @@
   "dependencies": {
     "babel-plugin-module-resolver": "^4.0.0",
     "bcrypt": "^5.0.0",
-    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "fastify": "^2.15.2",
     "fastify-helmet": "^3.0.2",
