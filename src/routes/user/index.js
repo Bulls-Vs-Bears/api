@@ -1,5 +1,5 @@
 import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
-import { createSuccessfulResponse } from '../../util/response';
+import { createSuccessfulResponse, createFailedResponse } from '../../util/response';
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -28,8 +28,12 @@ export async function userRoutes(server) {
       const response = createSuccessfulResponse("post", req.body, token);
       res.code(HTTP_CREATED).send(response);
     } catch (err) {
+      const message = "Invalid Email or Password";
+      let error = "101";
+
+      const response = createFailedResponse(message, error);
       server.log.error(err);
-      res.code(HTTP_ERROR).send(err);
+      res.code(HTTP_ERROR).send(response);
     }
   }
 }

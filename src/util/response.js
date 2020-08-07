@@ -19,3 +19,10 @@ export function createSuccessfulResponse(type, data, token){
     const response = { success, message, data, token };
     return response;
 }
+
+export function createFailedResponse(message, error){
+    const success = false;
+
+    const response = { success, message, error };
+    return response;
+}
