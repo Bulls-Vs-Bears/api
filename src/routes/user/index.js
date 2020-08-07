@@ -1,4 +1,5 @@
 import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
+import { createSuccessfulResponse, createFailedResponse } from '../../util/response';
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -23,19 +24,16 @@ export async function userRoutes(server) {
         'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
         [username, password, email]
       );
-       //! NOTE: This is not done yet, we want to 
-       //! fix the response objects to have some sort of standard.
-      const response = {
-        success: true, 
-        message: "User registered successfully", 
-        data: {}, 
-        token: {},
-      };
-
+      const token = null;
+      const response = createSuccessfulResponse("post", req.body, token);
       res.code(HTTP_CREATED).send(response);
     } catch (err) {
+      const message = "Invalid Username or Email";
+      let error = "101";      
+
+      const response = createFailedResponse(message, error);
       server.log.error(err);
-      res.code(HTTP_ERROR).send(err);
+      res.code(HTTP_ERROR).send(response);
     }
   }
 }
