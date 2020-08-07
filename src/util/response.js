@@ -22,7 +22,8 @@ export function createSuccessfulResponse(type, data, token){
 
 export function createFailedResponse(message, error){
     const success = false;
+    const data = {};
 
-    const response = { success, message, error };
+    const response = { success, message, error, data };
     return response;
 }
