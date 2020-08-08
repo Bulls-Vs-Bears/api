@@ -1,7 +1,6 @@
 import helmet from 'fastify-helmet';
 import rateLimit from 'fastify-rate-limit';
 import jwt from 'fastify-jwt';
-import cookie from 'fastify-cookie';
 import middie from 'middie';
 import plugin from 'fastify-plugin';
 import path from 'path';
@@ -25,7 +24,6 @@ export async function registerPlugins(server) {
       rateLimit, 
       setRateLimit(TIME_WINDOW, MAX_LIMIT)
     )
-    .register(cookie)
     .register(jwt, 
       { 
         secret: {
@@ -39,8 +37,7 @@ export async function registerPlugins(server) {
               __dirname, // eslint-disable-line
               '../../../config/keys')}/${JWT_PUBLIC_KEY}`
               ) 
-        }, 
-        cookie: { cookieName: 'token'},
+        },
         sign: { algorithm: JWT_ALGORITHM }
       }
     )
