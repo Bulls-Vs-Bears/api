@@ -1,32 +1,11 @@
-// import { SALT_ROUNDS, } from 'config';
+import { SALT_ROUNDS, } from 'config';
 import bcrypt from 'bcrypt';
 
 
 // Hashing password to store into Postgres
-export async function hashPassword(password){
-  const saltRounds = 8;
-  const hashedPassword = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, function(err, hash) {
-      if(err){
-        reject(err);
-      }
-      resolve(hash);
-    })
-  })
-
-  //----------------------------------------------------------------
-  // !! Currently having a problem with setting salt rounds as ENV 
-  // !! it will error with saying data and salt arguments required
-  // const hashedPassword = await new Promise((resolve, reject) => {
-  //   bcrypt.genSalt(SALT_ROUNDS, function(err, salt) {
-  //     bcrypt.hash(password, salt, function(err, hash) {
-  //       if (err) {
-  //         reject(err);
-  //       }
-  //       resolve(hash);
-  //     });
-  //   });
-  // });
+export async function hashPassword(password) {
+  const salt = await bcrypt.genSalt(parseInt(SALT_ROUNDS, 10));
+  const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
 }
 
