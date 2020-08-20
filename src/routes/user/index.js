@@ -1,5 +1,5 @@
 import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
-import { hashPassword, checkHash } from '../../utils/hash-password';
+import { hashPassword, } from '../../utils/hash-password';
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -27,9 +27,6 @@ export async function userRoutes(server) {
         'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
         [username, hashedPassword, email]
       );
-      
-      // check hash to make sure it is correct. It will throw an error if hash does not match.
-      await checkHash(password, hashedPassword);
       
        //! NOTE: This is not done yet, we want to 
        //! fix the response objects to have some sort of standard.
