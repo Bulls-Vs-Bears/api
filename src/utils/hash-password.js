@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 
 // Hashing password to store into Postgres
-export async function hashPassword(password) {
+export async function createHashedPassword(password) {
   const salt = await bcrypt.genSalt(parseInt(SALT_ROUNDS, 10));
   const hashedPassword = await bcrypt.hash(password, salt);
   if (hashedPassword == Error) {

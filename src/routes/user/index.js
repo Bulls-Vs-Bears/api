@@ -1,5 +1,5 @@
 import { HTTP_SUCCESS, HTTP_CREATED, HTTP_ERROR, } from 'config'; 
-import { hashPassword, } from '../../utils/hash-password';
+import { createHashedPassword, } from '../../utils/hash-password';
 
 export async function userRoutes(server) {
   server.get('/user', getUserHandler);
@@ -21,7 +21,7 @@ export async function userRoutes(server) {
       const { username, password, email } = req.body;
       
       // hash password using bcrypt
-      const hashedPassword = await hashPassword(password);
+      const hashedPassword = await createHashedPassword(password);
 
       await client.query(
         'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
