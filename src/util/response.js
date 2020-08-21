@@ -2,7 +2,7 @@ export function createSuccessfulResponse(type, data, token){
     let message;
     const success = true;
 
-    switch(type){
+    switch(type.toLowerCase()){
         case 'post':
             message = 'Data created successfully';
             break;
@@ -20,10 +20,10 @@ export function createSuccessfulResponse(type, data, token){
     return response;
 }
 
-export function createFailedResponse(message, error){
+export function createFailedResponse(message, errorCode){
     const success = false;
     const data = {};
 
-    const response = { success, message, error, data };
+    const response = { success, message, errorCode, data };
     return response;
 }

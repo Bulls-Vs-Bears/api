@@ -21,17 +21,18 @@ export async function userRoutes(server) {
       const { username, password, email } = req.body;
       
       await client.query(
-        'INSERT INTO bvb_accounts.user (user_name, user_password, user_email) VALUES ($1, $2, $3)',
+        'INSERT INTO bvb_accounts.user (user_name, user_password, user_email)',
         [username, password, email]
       );
       const token = null;
       const response = createSuccessfulResponse("post", req.body, token);
       res.code(HTTP_CREATED).send(response);
     } catch (err) {
-      const message = "Invalid Username or Email";
-      let error = "101";      
+      // checkError(err);
+      const message = "Internal Server Error";
+      let errorCode = "101";
 
-      const response = createFailedResponse(message, error);
+      const response = createFailedResponse(message, errorCode);
       server.log.error(err);
       res.code(HTTP_ERROR).send(response);
     }
