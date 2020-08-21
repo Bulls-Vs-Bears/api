@@ -31,10 +31,10 @@ export async function userRoutes(server) {
        //! NOTE: This is not done yet, we want to 
        //! fix the response objects to have some sort of standard.
       const response = {
-        "success": true, 
-        "message": "User registered successfully", 
-        "data": {}, 
-        "token": {},
+        success: true, 
+        message: "User registered successfully", 
+        data: {}, 
+        token: {},
       };
 
       res.code(HTTP_CREATED).send(response);

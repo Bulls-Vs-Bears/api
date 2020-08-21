@@ -15,8 +15,8 @@ export async function createHashedPassword(password) {
 // Check and confirm if password and hash is true
 // disabling eslint for now bc of checkHash not being used
 /* eslint-disable */
-export async function checkHash(password, hashedPassword) { 
-  const result = bcrypt.compare(password, hashedPassword)
+export async function doCheckHash(password, hashedPassword) { 
+  const result = await bcrypt.compare(password, hashedPassword)
   if (result == Error) {
     throw result;
   }
