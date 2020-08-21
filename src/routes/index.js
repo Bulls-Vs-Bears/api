@@ -1,7 +1,7 @@
 import { userRoutes } from './user';
 import { HTTP_SUCCESS, } from 'config'; 
 
-export async function routes(server) {
+export const routes = async function (server) {
   server.register(userRoutes, { prefix: '/api/v1' });
 
   server.get('/', async (_, res) => {
@@ -9,4 +9,4 @@ export async function routes(server) {
     const result = { hello: 'world'};
     return res.code(HTTP_SUCCESS).send(result);
   });
-}
+};

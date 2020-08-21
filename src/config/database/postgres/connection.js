@@ -5,7 +5,7 @@ import {
   PG_REMOVER_CONNECTION_STRING 
 } from 'config';
 
-export async function setDatabaseConnections(server) {
+export const setDatabaseConnections = async function(server) {
   server.register(postgres, {
     name: 'pgWriter',
     connectionString: PG_WRITER_CONNECTION_STRING
@@ -20,4 +20,4 @@ export async function setDatabaseConnections(server) {
     name: 'pgRemover',
     connectionString: PG_REMOVER_CONNECTION_STRING
   });
-}
+};

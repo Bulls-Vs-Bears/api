@@ -1,4 +1,4 @@
-export async function insert(user) {
+export const insert = async function (user) {
   const client = await this.pg.pgWriter.connect();
   const { username, password, email, access } = user;
   
@@ -9,4 +9,4 @@ export async function insert(user) {
       ($1, $2, $3, $4)`,
     [username, password, email, access]
   );
-}
+};

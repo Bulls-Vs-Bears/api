@@ -15,5 +15,9 @@
         "sourceType": "module"
     },
     "rules": {
+        "func-style": 2,
+        "function-paren-newline": 2,
+        "no-useless-constructor": 2,
+        "no-duplicate-imports": 2
     }
 }

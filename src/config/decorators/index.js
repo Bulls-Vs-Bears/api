@@ -1,4 +1,4 @@
-export async function decorateServer(server) {
+export const decorateServer = async function(server) {
   server.decorate('authenticate', async (req, res) => {
     try {
       await req.jwtVerify();
@@ -6,4 +6,4 @@ export async function decorateServer(server) {
       res.send(err);
     }
   });
-}
+};

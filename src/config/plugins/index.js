@@ -16,7 +16,7 @@ import {
   JWT_PUBLIC_KEY 
 } from 'config';
 
-export async function registerPlugins(server) {
+export const registerPlugins = async function(server) {
   server
     .register(middie)
     .register(helmet)
@@ -24,23 +24,22 @@ export async function registerPlugins(server) {
       rateLimit, 
       setRateLimit(TIME_WINDOW, MAX_LIMIT)
     )
-    .register(jwt, 
+    .register(
+      jwt, 
       { 
         secret: {
-          private: readFileSync(
-            `${path.join(
+          private: readFileSync(`${path.join(
+                __dirname, // eslint-disable-line
+                '../../../config/keys'
+              )}/${JWT_PRIVATE_KEY}`), 
+          public: readFileSync(`${path.join(
               __dirname, // eslint-disable-line
-              '../../../config/keys')}/${JWT_PRIVATE_KEY}`
-          ), 
-          public: readFileSync(
-            `${path.join(
-              __dirname, // eslint-disable-line
-              '../../../config/keys')}/${JWT_PUBLIC_KEY}`
-              ) 
+              '../../../config/keys'
+              )}/${JWT_PUBLIC_KEY}`) 
         },
         sign: { algorithm: JWT_ALGORITHM }
       }
     )
     .register(plugin(decorateServer))
     .register(routes);
-}
+};
