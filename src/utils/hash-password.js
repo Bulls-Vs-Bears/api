@@ -1,12 +1,11 @@
 import { SALT_ROUNDS, } from 'config';
 import bcrypt from 'bcrypt';
 
-
 // Hashing password to store into Postgres
-export async function createHashedPassword(password) {
+export const createHashedPassword = async function(password) {
   const salt = await bcrypt.genSalt(parseInt(SALT_ROUNDS, 10));
   const hashedPassword = await bcrypt.hash(password, salt);
-  if (hashedPassword == Error) {
+  if (!hashedPassword) {
     throw hashedPassword;
   }
   return hashedPassword;
@@ -15,7 +14,7 @@ export async function createHashedPassword(password) {
 // Check and confirm if password and hash is true
 // disabling eslint for now bc of checkHash not being used
 /* eslint-disable */
-export async function doCheckHash(password, hashedPassword) { 
+export const doCheckHash = async function(password, hashedPassword) { 
   const result = await bcrypt.compare(password, hashedPassword)
   if (result == Error) {
     throw result;
